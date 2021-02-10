@@ -1,12 +1,33 @@
 import React from 'react'
 
 class Filters extends React.Component {
+
+  handleClick = (event) => {
+    // event.preventDefault();
+    // console.log('show me')
+    // console.log(event.target)
+    // console.log(event.target.value)
+
+
+    // if(event.target && event.target.matches('#type')) {
+    //   this.props.handleTypeChange(event.target.value)
+    // }
+
+  }
+
+  handleChange = (event) => {
+    console.log(event.target.value)
+    this.props.handleTypechange(event.target.value)
+  }
+
+
+
   render() {
     return (
       <div className="ui form">
         <h3>Animal type</h3>
         <div className="field">
-          <select name="type" id="type">
+          <select name="type" id="type" onChange={event => this.handleChange(event)}>
             <option value="all">All</option>
             <option value="cat">Cats</option>
             <option value="dog">Dogs</option>
@@ -15,7 +36,8 @@ class Filters extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button">Find pets</button>
+          <button onClick={event => this.handleClick(event)}
+          className="ui secondary button">Find pets</button>
         </div>
       </div>
     )
