@@ -35,13 +35,12 @@ class App extends React.Component {
     let url = "/api/pet"
 
     if ( query === "all" ) {
-      url = "/api/pet"
+      url = `/api/pets`
     } else {
-      url = `/api/pets?type=${encodeURI(query)}`
+      url = `/api/pets?type=${query}`
     }
 
-    debugger;
-
+    console.log(url)
 
     // let url = `/api/pets?type=${encodeURI(query)}`
 
@@ -55,6 +54,13 @@ class App extends React.Component {
 
   }
 
+  onAdoptPet = (id) => {
+    let findPet = this.state.pets.find(pet => pet.id === id)
+
+    findPet.isAdopted = true
+
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -64,10 +70,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters handleTypechange={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser petData={this.state.pets}/>
+              <PetBrowser petData={this.state.pets} onAdoptPet={this.onAdoptPet} />
             </div>
           </div>
         </div>
